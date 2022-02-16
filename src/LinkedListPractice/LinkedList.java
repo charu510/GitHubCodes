@@ -53,6 +53,37 @@ public class LinkedList {
         }
     }
 
+    //making the addAt function
+    public void addAt(int item,int k) throws Exception{
+        if (k==0){
+            addFirst(item);
+        }
+        else if (k == this.size){
+            addLast(item);
+        }
+        else{
+            //creating the new node
+            Node nn = new Node(item);
+            //getting the node before k
+            Node before = GetAt(k-1);
+            nn.next = before.next;
+            before.next = nn;
+            this.size++;
+        }
+    }
+
+    //making the GetNodeAt
+    public Node GetAt(int k) throws Exception{
+        if (k<=0 && k>=this.size){
+            throw new Exception("Invalid index");
+        }
+        Node temp = this.head;
+        for (int i = 1; i <=k ; i++) {
+            temp = temp.next;
+        }
+        return temp;
+    }
+
     //making the display function
     public void display(){
         Node temp = this.head;
