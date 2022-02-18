@@ -1,5 +1,7 @@
 package LinkedListPractice;
 
+import java.util.concurrent.ExecutionException;
+
 public class LinkedList {
     //making the node class
     public class Node{
@@ -94,6 +96,99 @@ public class LinkedList {
         }
         System.out.print(".");
     }
+
+    //making the get functions
+    public int getFirst() throws Exception{
+        if (this.size == 0){
+            throw new Exception("Linkedlist is empty");
+        }
+        return this.head.data;
+    }
+
+    //making the getLast function
+    public int getLast() throws Exception{
+        if (this.size == 0){
+            throw new Exception("Linkedlist is empty");
+        }
+        return this.tail.data;
+    }
+
+    //making the Getat
+    public int getAt(int k) throws Exception{
+        if (this.size == 0){
+            throw new Exception("Linked list is empty");
+        }
+        return this.GetAt(k).data;
+    }
+
+    //making the remove functions
+    public int removeFirst() throws Exception{
+        if (this.size == 0){
+            throw new Exception("Linked list is empty");
+        }
+        int rv = this.head.data;
+
+        if (this.size == 1){
+            this.head = null;
+            this.tail = null;
+            this.size--;
+        }
+        else{
+            Node temp = this.head;
+            this.head = this.head.next;
+            temp.next = null;
+            this.size--;
+        }
+        return rv;
+    }
+
+    //making the removeLast function
+    public int removeLast() throws Exception{
+        if (this.size == 0){
+           throw new Exception("Linked list is empty");
+        }
+
+        //if there is only one node then call remove first
+        if (this.size==1){
+            return removeFirst();
+        }
+        else{
+            //capturing the second last node
+            Node sl = GetAt(this.size-1);
+            int temp = sl.next.data;
+            sl.next = null;
+            this.tail = sl;
+            this.size--;
+            return temp;
+        }
+
+    }
+
+    //making the removeAt function
+    public int removeAt(int k) throws Exception{
+        if (k<0 || k>=this.size){
+            throw new Exception("Invalid index");
+        }
+        if (k==0){
+            return this.removeFirst();
+        }
+        else if (k == this.size-1){
+            return removeLast();
+        }
+        else{
+            Node k_1 = GetAt(k-1); //before
+            Node kth = GetAt(k);
+            k_1.next = kth.next;
+            kth.next = null;
+            this.size--;
+            return kth.data;
+        }
+
+    }
+
+
+
+  
 
 
 }
