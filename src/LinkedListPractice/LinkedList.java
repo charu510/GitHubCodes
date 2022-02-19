@@ -75,16 +75,16 @@ public class LinkedList {
     }
 
     //making the GetNodeAt
-    public Node GetAt(int k) throws Exception{
-        if (k<=0 && k>=this.size){
-            throw new Exception("Invalid index");
+   public Node GetAt(int k) throws Exception{
+        if (k<0 || k>=this.size){
+            throw new Exception("Invalid index for k");
         }
         Node temp = this.head;
-        for (int i = 1; i <=k ; i++) {
-            temp = temp.next;
-        }
-        return temp;
-    }
+       for (int i = 1; i <=k ; i++) {
+           temp = temp.next;
+       }
+       return temp;
+   }
 
     //making the display function
     public void display(){
@@ -185,6 +185,58 @@ public class LinkedList {
         }
 
     }
+
+    //making the size function
+    public int getSize(){
+        Node temp = this.head;
+        int count = 0;
+        while(temp!=null){
+            count++;
+            temp = temp.next;
+        }
+        return count;
+    }
+
+    //making the reverse functions
+
+    //(i) data reversing
+    public void dataReverseIterative() throws Exception{
+        int left = 0;
+        int right = this.size-1;
+
+        while (left<right){
+            Node left_node = GetAt(left);
+            Node right_Node = GetAt(right);
+            int t = left_node.data;
+            left_node.data = right_Node.data;
+            right_Node.data = t;
+
+            left++;
+            right--;
+        }
+    }
+
+    //(ii) pointer reverse
+    public void pointerReverseIterative(){
+        Node prev = null;
+        Node curr = this.head;
+
+        while(curr!=null){
+            //capturing the value to be replaced
+            Node ahead = curr.next;
+            curr.next = prev;
+            //rearranging the nodes
+            prev = curr;
+            curr = ahead;
+        }
+
+        //at last swapping the head and tails
+        Node temp = this.head;
+        this.head = this.tail;
+        this.tail = temp;
+    }
+
+
 
 
 
